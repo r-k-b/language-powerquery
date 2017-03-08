@@ -1,6 +1,6 @@
 # Power Query Formula Language (aka M) support in Atom
 
-Adds syntax highlighting and snippets to Standard ML files in Atom.
+Adds syntax highlighting and snippets to Power Query files in Atom.
 
 Based on [Jakehp's Standard ML language plugin.](https://github.com/Jakehp/language-sml)
 
