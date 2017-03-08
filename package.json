@@ -1,6 +1,6 @@
 {
   "name": "language-powerquery",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Power Query Formula Language (aka M) support for Atom",
   "repository": "https://github.com/r-k-b/language-powerquery",
