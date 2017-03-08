@@ -1,0 +1,62 @@
+/*
+multiline
+comment
+*/
+
+let
+    // inline comment
+    markAsUTC = (x as nullable datetime) as nullable datetimezone =>
+        try
+            DateTimeZone.ToLocal(
+                DateTime.AddZone(x, 0)
+            )
+
+        otherwise
+            null,
+
+
+    Source = Sql.Databases("builent.database.windows.net"),
+
+    accelo = Source{[Name="accelo"]}[Data],
+
+    dbo_activities = accelo{[Schema = "dbo",Item="activitiesWithTime"]}[Data],
+    #"Removed Columns2" = Table.RemoveColumns(dbo_activities,{"details", "message_id"}),
+
+    #"Renamed Columns" = Table.RenameColumns(
+        #"Removed Columns2",
+        {
+            {"nonbillable", "nonbillable (secs)"},
+            {"billable", "billable (secs)"},
+            {"date_created", "date_created_RAW"},
+            {"date_started", "date_started_RAW"},
+            {"date_ended", "date_ended_RAW"},
+            {"date_due", "date_due_RAW"},
+            {"date_updated", "date_updated_RAW"},
+            {"createdAt", "createdAt_RAW"},
+            {"updatedAt", "updatedAt_RAW"}
+        }
+    ),
+
+    #"Duplicated Column" = Table.DuplicateColumn(#"Renamed Columns", "date_logged", "date_logged_RAW"),
+
+    #"Changed Type" = Table.TransformColumnTypes(
+        #"Duplicated Column",
+        {
+            {"id", type text},
+            {"parent_id", type text},
+            {"thread_id", type text},
+            {"against_id", type text},
+            {"owner_id", type text},
+            {"staff", type text},
+            {"rate", type text},
+            {"rate_charged", type text},
+            {"class", type text},
+            {"class_id", type text},
+            {"task", type text},
+            {"task_id", type text},
+            {"priority", type text},
+            {"priority_id", type text}
+        }
+    )
+in
+    #"Changed Type"

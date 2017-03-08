@@ -1,0 +1,4 @@
+'.source.powerquery':
+  'editor':
+    'commentStart': 'foobar'
+    'commentEnd': 'foobaz'

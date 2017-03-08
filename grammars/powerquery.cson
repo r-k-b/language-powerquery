@@ -1,0 +1,115 @@
+'fileTypes': [
+  'powerquery'
+  'm'
+]
+'name': 'Power Query (M)'
+'foldingStartMarker': '\{\s*$' # ignored; see <https://github.com/atom/first-mate/issues/48>
+'foldingStopMarker': '^\s*\}'
+'patterns': [
+  {
+    'include': '#comments'
+  }
+  {
+    'match': '\\b(let|in|each|if|then|else|try|otherwise)\\b'
+    'name': 'keyword.other.m'
+  }
+  {
+    'begin': '\\b(let)\\b'
+    'captures':
+      '1':
+        'name': 'keyword.other.m'
+      '2':
+        'name': 'keyword.other.m'
+    'end': '\\b(in)\\b'
+    'name': 'meta.exp.let.m'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'match': '\\b(if|then|else)\\b'
+    'name': 'keyword.control.m'
+  }
+  {
+    'begin': '#{0}"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.m'
+    'end': '"'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.m'
+    'name': 'string.quoted.double.m'
+    'patterns': [
+      {
+        'match': '\\\\.'
+        'name': 'constant.character.escape.m'
+      }
+    ]
+  }
+  {
+    'match': '\\b(datetime|date|text)\\b'
+    'name': 'support.type.prelude.elm'
+  }
+  {
+    'match': '\\b[a-z][a-zA-Z0-9_\']*\\b'
+    'name': 'variable.other.generic-type.elm'
+  }
+  {
+    'match': ','
+    'name': 'punctuation.separator.comma.m'
+  }
+  {
+    'begin': '#"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.quotedvariable.begin.m'
+    'end': '"'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.quotedvariable.end.m'
+    'name': 'variable.quoted.double.m'
+  }
+  {
+    'match': '\\b(and|or|not)\\b'
+    'name': 'keyword.operator.logical.m'
+  }
+  {
+    'match': '\\b(null|true|false)\\b'
+    'name': 'constant.language.m'
+  }
+]
+'repository':
+  'comments':
+    'patterns': [
+      {
+        'captures':
+          '1':
+            'name': 'punctuation.definition.comment.m'
+        'begin': '//'
+        'end': '$'
+        'name': 'punctuation.definition.comment.m'
+      }
+      {
+        'begin': '\\/\\*'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.block_comment.begin.m'
+        'end': '\\*\\/'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.block_comment.end.m'
+        'name': 'comment.block.m'
+        'patterns': [
+          {
+            'include': '#comments'
+          }
+        ]
+      }
+      {
+        'include': '#comments'
+      }
+    ]
+'scopeName': 'source.m'
