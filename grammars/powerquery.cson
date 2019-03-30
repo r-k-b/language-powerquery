@@ -1,5 +1,6 @@
 'fileTypes': [
   'powerquery'
+  'mquery'
   'm'
 ]
 'name': 'Power Query (M)'
@@ -44,7 +45,7 @@
     'name': 'string.quoted.double.m'
     'patterns': [
       {
-        'match': '\\\\.'
+        'match': '\\\\[^"]'
         'name': 'constant.character.escape.m'
       }
     ]
